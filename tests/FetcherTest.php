@@ -43,7 +43,8 @@ class FetcherTest extends PHPUnit_Framework_TestCase
         $inputs = array(
             'id asd',
             '',
-            'id ASC, review taco'
+            'id ASC, review taco',
+            'id ASC review DESC'
         );
         
         $fetcher = new Mock_Fetcher();

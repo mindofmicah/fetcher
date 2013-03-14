@@ -62,6 +62,13 @@ class FetcherTest extends PHPUnit_Framework_TestCase
         $fetcher->orderBy = 'id DESC';
         $this->assertEquals('id DESC', $fetcher->getOrderBy());
     }
+    
+    public function testChainability()
+    {
+        $fetcher = new Mock_Fetcher();
+        $this->assertInstanceOf('Fetcher', $fetcher->setOrderBy('valid'));
+        $this->assertInstanceOf('Fetcher', $fetcher->setOrderBy('in valid'));
+    }
 }
 
 class Mock_Fetcher extends Fetcher

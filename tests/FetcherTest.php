@@ -53,6 +53,15 @@ class FetcherTest extends PHPUnit_Framework_TestCase
             $this->assertNull($fetcher->orderBy);
         }
     }
+    
+    public function testGetOrderBy()
+    {
+        $fetcher = new Mock_Fetcher();
+        
+        $this->assertNull($fetcher->getOrderBy());
+        $fetcher->orderBy = 'id DESC';
+        $this->assertEquals('id DESC', $fetcher->getOrderBy());
+    }
 }
 
 class Mock_Fetcher extends Fetcher

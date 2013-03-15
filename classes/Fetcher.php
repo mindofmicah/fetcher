@@ -62,18 +62,36 @@ class Fetcher
     {
         return $this->orderBy;
     }
-/*
+
+    /**
+     * Setter for limit
+     * 
+     * @param string $limit New value for the limit property
+     * 
+     * @return \Fetcher
+     */
     public function setLimit($limit)
     {
-        $this->limit = $limit;
+        // Check to make sure that the new limit is of propert form
+        if (preg_match('%^\s*(\d+)\s*(?:,\s*(\d+))?$%', $limit, $match)) {
+            $this->limit = array_key_exists(2, $match) 
+                ? $match[1] . ', ' . $match[2] // combine both indexes w/comma 
+                : $match[1];                  //  just use the one index
+        }
+        // Chainability
         return $this;
     }
 
+    /**
+     * Simple getter for the limit property
+     * 
+     * @return string
+     */
     public function getLimit()
     {
         return $this->limit;
     }
-
+/*
     public function getWheres()
     {
         return $this->wheres;

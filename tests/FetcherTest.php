@@ -98,6 +98,13 @@ class FetcherTest extends PHPUnit_Framework_TestCase
         }
     }
 
+    public function testGetLimit()
+    {
+        $fetcher = new Mock_Fetcher();
+        $this->assertNull($fetcher->getLimit());
+        $fetcher->limit = '4';
+        $this->assertEquals('4', $fetcher->getLimit());
+    }
     public function testGetOrderBy()
     {
         $fetcher = new Mock_Fetcher();

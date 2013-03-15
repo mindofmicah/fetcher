@@ -38,7 +38,7 @@ class FetcherTest extends PHPUnit_Framework_TestCase
     {
         $inputs = array(
             '5,3' => '5, 3',
-            '3, 2' => '3,2'
+            '3, 2' => '3, 2'
         );
         $fetcher = new Mock_Fetcher();
         foreach ($inputs as $input => $expected) {

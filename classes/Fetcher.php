@@ -7,13 +7,32 @@
  */
 class Fetcher
 {
-    protected $wheres, $index, $sql, $callBack, $orderBy, $limit;
+    protected $wheres, $index, $sql, $callBack, $orderBy, $limit, $selects = array();
 
     public function __construct()
     {
         $this->wheres = array();
     }
 
+    /**
+     * Add a collection of columns to the SQL query
+     * 
+     * @param array $selects Which columns should be added to the query
+     * @param string $prefix optional text to help isolate the columns
+     * 
+     * @return \Fetcher
+     */
+    public function addSelects(array $selects, $prefix = null)
+    {
+        foreach ($selects as $select) {
+            if (!is_null($prefix)) {
+                $select = $prefix . '.' . $select . ' AS '.$prefix.'_' . $select; 
+            }
+            $this->selects[] = $select;
+        }
+        return $this;
+    }
+    
     /**
      * Setter for the order by property
      * 

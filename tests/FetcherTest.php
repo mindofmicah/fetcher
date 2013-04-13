@@ -4,7 +4,6 @@ require 'bootstrap.php';
 
 class FetcherTest extends PHPUnit_Framework_TestCase
 {
-
     public function testLimitWithInvalidParams()
     {
         $inputs = array(
@@ -105,6 +104,18 @@ class FetcherTest extends PHPUnit_Framework_TestCase
         $fetcher->limit = '4';
         $this->assertEquals('4', $fetcher->getLimit());
     }
+
+    public function testAddSelect()
+    {
+        $fetcher = new Mock_Fetcher();
+        $this->assertEquals(array(), $fetcher->selects);
+        $fetcher->addSelects(array('tacos','nachos'));
+        $this->assertEquals(array('tacos','nachos'), $fetcher->selects);
+        
+        $fetcher->addSelects(array('bird'), 'pc');
+        $this->assertEquals(array('tacos','nachos', 'pc.bird AS pc_bird'), $fetcher->selects);
+    }
+    
     public function testGetOrderBy()
     {
         $fetcher = new Mock_Fetcher();
@@ -121,6 +132,7 @@ class FetcherTest extends PHPUnit_Framework_TestCase
         $this->assertInstanceOf('Fetcher', $fetcher->setOrderBy('in valid'));
         $this->assertInstanceOf('Fetcher', $fetcher->setLimit('1'));
         $this->assertInstanceOf('Fetcher', $fetcher->setLimit('in valid'));
+        $this->assertInstanceOf('Fetcher', $fetcher->addSelects(array()));
     }
 
 }
